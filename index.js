@@ -5,6 +5,7 @@ var moment = require('moment');
 
 var api = require('./api-raw.js');
 var converse = require('./api-converse.js');
+var assistant = require('./assistant.js');
 
 require('promise/lib/rejection-tracking').enable(
   { allRejections: true }
@@ -52,9 +53,7 @@ app.get('/api/converse/last-night-on', function(req, res) {
   );
 });
 
-// TODO add Google. Log users and responses
-// TODO add Alexa. Log users and responses
-// TODO add Facebook. Log users and responses
+app.use('/assistant', assistant.build());
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
