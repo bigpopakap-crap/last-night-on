@@ -2,25 +2,25 @@ const mrkapil = require('./mrkapil');
 
 const handlers = require('./assistant-handlers.js');
 
-const DEFAULT_INTENT = new mrkapil.Intent();
-const IS_IT_ON_INTENT = new mrkapil.Intent();
+const DEFAULT_INTENT = new mrkapil.Intent('default');
+const IS_IT_ON_INTENT = new mrkapil.Intent('isiton');
 
 function build() {
   const assistant = new mrkapil.AssistantBuilder()
     .start(function(delegate) {
-     return handlers.welcome(delegate);
+      return handlers.welcome(delegate);
     })
     .end(function(delegate, isCancel) {
-     return handlers.goodbye(delegate, isCancel);
+      return handlers.goodbye(delegate, isCancel);
     })
     .intent(DEFAULT_INTENT, function(delegate) {
-     return handlers.welcome(delegate);
+      return handlers.welcome(delegate);
     })
     .intent(IS_IT_ON_INTENT, function(delegate) {
-     return handlers.isItOn(delegate);
+      return handlers.isItOn(delegate);
     })
     .fallback(function(delegate) {
-     return handlers.fallback(delegate);
+      return handlers.fallback(delegate);
     })
   .build();
 
@@ -40,6 +40,7 @@ function build() {
     .facebook({
 
     })
+    .debugAt('/debug')
   .build(assistant);
 
   return app;

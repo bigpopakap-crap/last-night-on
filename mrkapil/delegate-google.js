@@ -3,6 +3,7 @@ const Delegate = require('./delegate');
 class GoogleDelegate extends Delegate {
 
   constructor(assistant) {
+    super();
     this.assistant = assistant;
   }
 

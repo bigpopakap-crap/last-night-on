@@ -30,10 +30,10 @@ class Assistant {
   handle(intent, delegate) {
     const handlers = this.intentHandlers
                         .filter(ih => ih.intent.getName() === intent.getName())
-                        .map(ih => ih.intent.handler);
+                        .map(ih => ih.handler);
 
     if (handlers.length > 0) {
-      return handler(delegate);
+      return handlers[0](delegate);
     } else {
       return this.fallbackHandler(delegate);
     }

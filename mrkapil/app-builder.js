@@ -1,12 +1,16 @@
 var express = require('express');
 
 var GoogleAppBuilder = require('./app-builder-google.js');
+var DebugAppBuilder = require('./app-builder-debug.js');
 
 class AppBuilder {
 
   constructor() {
     // do nothing
+    this.useGoogle = false;
     this.googleBuilder = new GoogleAppBuilder();
+
+    this.shouldAllowDebug = false;
   }
 
   mixpanel(options) {
@@ -19,13 +23,20 @@ class AppBuilder {
     return this;
   }
 
+  debugAt(debugMountAt) {
+    this.debugMountAt = debugMountAt;
+    this.shouldAllowDebug = true;
+    return this;
+  }
+
   google(mountAt, options) {
     this.googleMountAt = mountAt;
-    this.googleBuilder(options);
+    this.google(options);
     return this;
   }
 
   google({ shouldUseDialogFlow }) {
+    this.useGoogle = true;
     this.googleBuilder.useDialogFlow(shouldUseDialogFlow);
     return this;
   }
@@ -44,11 +55,19 @@ class AppBuilder {
     const app = express();
 
     // build and attach the google app
-    const googleApp = this.googleBuilder.build(assistant);
-    if (this.googleMountAt) {
-      app.use(this.googleMountAt, googleApp);
-    } else {
-      app.use(googleApp);
+    if (this.useGoogle) {
+      const googleApp = this.googleBuilder.build(assistant);
+      if (this.googleMountAt) {
+        app.use(this.googleMountAt, googleApp);
+      } else {
+        app.use(googleApp);
+      }
+    }
+
+    // build the debug app
+    if (this.shouldAllowDebug) {
+      const debugApp = new DebugAppBuilder().build(assistant);
+      app.use(this.debugMountAt, debugApp);
     }
 
     return app;

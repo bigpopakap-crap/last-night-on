@@ -15,15 +15,15 @@ class GoogleAppBuilder {
     return this;
   }
 
-  // TODO set up dashbot
   build(assistant) {
     const app = express();
 
     app.post('/', (request, response) => {
+      // TODO actually switch between the DialogFlowApp and the ApiSdk
       const googleApp = new DialogflowApp({ request, response });
 
       const actionMap = new Map();
-      assistant.getIntents().each(intent => {
+      assistant.getIntents().forEach(intent => {
         actionMap.set(intent.getName(), function(googleApp) {
           const delegate = new GoogleDelegate(googleApp);
           assistant.handle(intent, delegate);
