@@ -1,6 +1,6 @@
 const mrkapil = require('./mrkapil');
 
-const handlers = require('./handlers.js');
+const handlers = require('./assistant-handlers.js');
 
 const DEFAULT_INTENT = new mrkapil.Intent();
 const IS_IT_ON_INTENT = new mrkapil.Intent();
@@ -31,8 +31,8 @@ function build() {
     .dashbot({
 
     })
-    .google({
-
+    .google('/google', {
+      shouldUseDialogFlow: true
     })
     .alexa({
 

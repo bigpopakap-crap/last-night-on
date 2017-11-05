@@ -3,10 +3,10 @@ class Delegate {
   getIntent() {}
   getRequestText() {}
   getArg(argName) { return null; }
-  say(text) {}
+  tell(text) {}
   ask(text) {}
 
-  respond(isQuestion, text) {
+  say(isQuestion, text) {
     if (isQuestion) {
       return this.ask(text);
     } else {

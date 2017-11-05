@@ -6,24 +6,16 @@ class GoogleDelegate extends Delegate {
     this.assistant = assistant;
   }
 
-  getIntent() {
-
-  }
-
-  getRequestText() {
-
-  }
-
   getArg(argName) {
-    return null;
+    return this.assistant.getArgument(argName);
   }
 
-  say(text) {
-
+  tell(text) {
+    return this.assistant.tell(text);
   }
 
   ask(text) {
-
+    return this.assistant.ask(text);
   }
 
 }
