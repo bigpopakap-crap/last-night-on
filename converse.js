@@ -59,11 +59,17 @@ function isLastNightOn(queryDate) {
   return api.isLastNightOn(queryDate).then(
     // success
     (apiResponse) => {
-      return Promise.resolve(converseString(apiResponse));
+      return Promise.resolve({
+        converse: converseString(apiResponse),
+        raw: apiResponse
+      });
     },
     // error
     (error) => {
-      return Promise.reject(errorString());
+      return Promise.reject({
+        converse: errorString(),
+        raw: error
+      });
     }
   );
 }
