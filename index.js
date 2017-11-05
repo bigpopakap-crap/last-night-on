@@ -3,8 +3,8 @@ var app = express();
 
 var moment = require('moment');
 
-var api = require('./api.js');
-var converse = require('./converse.js');
+var api = require('./api-raw.js');
+var converse = require('./api-converse.js');
 
 require('promise/lib/rejection-tracking').enable(
   { allRejections: true }
