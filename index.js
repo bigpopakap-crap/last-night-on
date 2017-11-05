@@ -16,6 +16,7 @@ app.get('/status', function(req, res) {
   res.sendStatus(200);
 });
 
+// TODO log the raw API user, and request/response
 app.get('/api/raw/last-night-on', function(req, res) {
   const queryDate = req.query.queryDate ? moment(req.query.queryDate) : moment();
 
@@ -33,13 +34,16 @@ app.get('/api/raw/last-night-on', function(req, res) {
   );
 });
 
+// TODO log the raw API user, and request/response
 app.get('/api/converse/last-night-on', function(req, res) {
   const queryDate = req.query.queryDate ? moment(req.query.queryDate) : moment();
 
   converse.isLastNightOn(queryDate).then(
     // success
     (result) => {
-      res.status(200).send(result);
+      res.status(200)
+         .header('content-type', 'application/json')
+         .send(result);
     },
     // error
     (error) => {
@@ -47,6 +51,10 @@ app.get('/api/converse/last-night-on', function(req, res) {
     }
   );
 });
+
+// TODO add Google. Log users and responses
+// TODO add Alexa. Log users and responses
+// TODO add Facebook. Log users and responses
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

@@ -12,22 +12,47 @@ function converseString({
   if (isLastNightOn) {
     // Yay! There's an episode
     if (episode.title) {
-      return `Yay! There is an episode. It is called ${episode.title}`;
+      return {
+        key: '',
+        flavorKey: '',
+        quipKey: '',
+        fullText: `Yay! There is an episode. It is called ${episode.title}`
+      };
     } else {
-      return 'Yay! There is an episode';
+      return {
+        key: '',
+        flavorKey: '',
+        quipKey: '',
+        fullText: 'Yay! There is an episode'
+      }
     }
   } else if (isThereData) {
     // No, there is no episode tonight
-    return 'No, there is no episode tonight';
+    return {
+      key: '',
+      flavorKey: '',
+      quipKey: '',
+      fullText: 'No, there is no episode tonight'
+    }
   } else {
     // We don't have the data... either it's the season break
     // or someone hasn't maintained adding the data here
-    return 'There is no data';
+    return {
+      key: '',
+      flavorKey: '',
+      quipKey: '',
+      fullText: 'There is no data'
+    }
   }
 }
 
 function errorString() {
-  return 'Oh no, something went wrong';
+  return {
+    key: '',
+    flavorKey: '',
+    quipKey: '',
+    fullText: 'Oh no, something went wrong'
+  }
 }
 
 function isLastNightOn(queryDate) {
