@@ -4,6 +4,7 @@ var app = express();
 var moment = require('moment');
 
 var api = require('./api.js');
+var converse = require('./converse.js');
 
 require('promise/lib/rejection-tracking').enable(
   { allRejections: true }
@@ -24,6 +25,21 @@ app.get('/api/raw/last-night-on', function(req, res) {
       res.status(200)
          .header('content-type', 'application/json')
          .send(result);
+    },
+    // error
+    (error) => {
+      res.status(500).send(error);
+    }
+  );
+});
+
+app.get('/api/converse/last-night-on', function(req, res) {
+  const queryDate = req.query.queryDate ? moment(req.query.queryDate) : moment();
+
+  converse.isLastNightOn(queryDate).then(
+    // success
+    (result) => {
+      res.status(200).send(result);
     },
     // error
     (error) => {
