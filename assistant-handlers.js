@@ -1,4 +1,6 @@
 const Promise = require('promise');
+const moment = require('moment');
+
 const converse = require('./api-converse.js');
 
 function welcome(delegate) {
@@ -9,6 +11,8 @@ function welcome(delegate) {
 }
 
 function isItOn(delegate) {
+  const queryDate = moment();
+
   return converse.isLastNightOn(queryDate).then(
     result => Promise.resolve(result.converse.fullText),
     error => Promise.resolve(error.converse.fullText)
