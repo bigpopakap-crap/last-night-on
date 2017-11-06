@@ -68,14 +68,21 @@ const mrkapilApp = new mrkapil.AppBuilder()
 ```
 
 ## 6. Start listening
+You must use `body-parser`
 ```
+const bodyParser = require('body-parser');
+mrkapilApp.use(bodyParser.json({ type: 'application/json' }));
 mrkapilApp.listen(...);
 ```
 
-Or mount it on an existing `express` app
+Or mount it on an existing `express` app. You still
+have to use `body-parser`
 ```
 const express = require('express')
 const app = express();
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json({ type: 'application/json' }));
 
 app.use('/namespace', mrkapilApp);
 

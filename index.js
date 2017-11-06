@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 var moment = require('moment');
 
@@ -12,6 +13,8 @@ require('promise/lib/rejection-tracking').enable(
 );
 
 app.set('port', (process.env.PORT || 5000));
+
+app.use(bodyParser.json({ type: 'application/json' }));
 
 app.get('/status', function(req, res) {
   res.sendStatus(200);
