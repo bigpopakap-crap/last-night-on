@@ -1,7 +1,5 @@
 class Delegate {
 
-  getIntent() {}
-  getRequestText() {}
   getArg(argName) { return null; }
   tell(text) {}
   ask(text) {}

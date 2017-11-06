@@ -29,15 +29,13 @@ class AppBuilder {
     return this;
   }
 
-  google(mountAt, options) {
-    this.googleMountAt = mountAt;
-    this.google(options);
-    return this;
-  }
-
-  google({ shouldUseDialogFlow }) {
+  google({
+    mountAt,
+    shouldUseDialogFlow
+  }) {
     this.useGoogle = true;
-    this.googleBuilder.useDialogFlow(shouldUseDialogFlow);
+    this.googleMountAt = mountAt;
+    this.googleBuilder.useDialogFlow(shouldUseDialogFlow)
     return this;
   }
 

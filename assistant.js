@@ -31,8 +31,10 @@ function build() {
     .dashbot({
 
     })
-    .google('/google', {
-      shouldUseDialogFlow: true
+    .google({
+      mountAt: '/google',
+      shouldUseDialogFlow: true,
+      shouldAllowDebug: true
     })
     .alexa({
 
