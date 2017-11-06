@@ -7,21 +7,11 @@ const IS_IT_ON_INTENT = new mrkapil.Intent('isiton');
 
 function build() {
   const assistant = new mrkapil.AssistantBuilder()
-    .start(function(delegate) {
-      return handlers.welcome(delegate);
-    })
-    .end(function(delegate, isCancel) {
-      return handlers.goodbye(delegate, isCancel);
-    })
-    .intent(DEFAULT_INTENT, function(delegate) {
-      return handlers.welcome(delegate);
-    })
-    .intent(IS_IT_ON_INTENT, function(delegate) {
-      return handlers.isItOn(delegate);
-    })
-    .fallback(function(delegate) {
-      return handlers.fallback(delegate);
-    })
+    .start(delegate => handlers.welcome(delegate))
+    .end((delegate, isCancel) => handlers.goodbye(delegate, isCancel))
+    .intent(DEFAULT_INTENT, delegate => handlers.welcome(delegate))
+    .intent(IS_IT_ON_INTENT, delegate => handlers.isItOn(delegate))
+    .fallback(delegate => handlers.fallback(delegate))
   .build();
 
   const app = new mrkapil.AppBuilder()
