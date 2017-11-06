@@ -26,7 +26,7 @@ class GoogleAppBuilder {
     const app = express();
 
     app.post('/', (request, response) => {
-      const googleApp = this.getGoogleApp();
+      const googleApp = this.getGoogleApp(request, response);
 
       const actionMap = new Map();
       assistant.getIntents().forEach(intent => {
