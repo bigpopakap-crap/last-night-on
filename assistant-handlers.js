@@ -10,6 +10,7 @@ function welcome(delegate) {
   });
 }
 
+// TODO allow asking about next week
 function isItOn(delegate) {
   const queryDate = moment();
 
