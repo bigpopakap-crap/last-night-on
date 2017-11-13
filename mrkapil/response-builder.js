@@ -1,3 +1,4 @@
+const Promise = require('promise');
 const Response = require('./response.js');
 
 class ResponseBuilder {
@@ -23,6 +24,10 @@ class ResponseBuilder {
       isPrompt: this.isPrompt,
       text: this.text
     });
+  }
+
+  buildAsPromise() {
+    return Promise.resolve(this.build());
   }
 
 }
