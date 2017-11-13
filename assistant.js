@@ -10,14 +10,14 @@ const CANCEL_INTENT = new mrkapil.Intent('cancel');
 
 function build() {
   const assistant = new mrkapil.AssistantBuilder()
-    .start(delegate => handlers.welcome(delegate))
-    .end((delegate, isCancel) => handlers.goodbye(delegate, isCancel))
-    .intent(WELCOME_INTENT, delegate => handlers.welcome(delegate))
-    .intent(IS_IT_ON_INTENT, delegate => handlers.isItOn(delegate))
-    .intent(FALLBACK_INTENT, delegate => handlers.fallback(delegate))
-    .intent(BYE_INTENT, delegate => handlers.goodbye(delegate, false))
-    .intent(CANCEL_INTENT, delegate => handlers.goodbye(delegate, true))
-    .fallback(delegate => handlers.fallback(delegate))
+    .start(inputData => handlers.welcome(inputData))
+    .end((inputData, isCancel) => handlers.goodbye(inputData, isCancel))
+    .intent(WELCOME_INTENT, inputData => handlers.welcome(inputData))
+    .intent(IS_IT_ON_INTENT, inputData => handlers.isItOn(inputData))
+    .intent(FALLBACK_INTENT, inputData => handlers.fallback(inputData))
+    .intent(BYE_INTENT, inputData => handlers.goodbye(inputData, false))
+    .intent(CANCEL_INTENT, inputData => handlers.goodbye(inputData, true))
+    .fallback(inputData => handlers.fallback(inputData))
   .build();
 
   const app = new mrkapil.AppBuilder()

@@ -1,42 +1,44 @@
 const Promise = require('promise');
 const moment = require('moment');
-
+const ResponseBuilder = require('./mrkapil').ResponseBuilder;
 const converse = require('./api-converse.js');
 
-function welcome(delegate) {
-  return new Promise(resolve => {
-    delegate.tell('Hello there!');
-    resolve();
-  });
+function welcome(inputData) {
+  return Promise.resolve(
+    new ResponseBuilder()
+      .text('Hello there!')
+      .build()
+  );
 }
 
 // TODO allow asking about next week
-function isItOn(delegate) {
+function isItOn(inputData) {
   const queryDate = moment();
 
   return converse.isLastNightOn(queryDate).then(
     result => Promise.resolve(result.converse.fullText),
     error => Promise.resolve(error.converse.fullText)
-  ).then(text => {
-    return new Promise(resolve => {
-      delegate.tell(text);
-      resolve();
-    });
-  });
+  ).then(text => Promise.resolve(
+    new ResponseBuilder()
+      .text(text)
+      .build()
+  ));
 }
 
-function goodbye(delegate, isCancel) {
-  return new Promise(resolve => {
-    delegate.tell('Goodbye!');
-    resolve();
-  });
+function goodbye(inputData, isCancel) {
+  return Promise.resolve(
+    new ResponseBuilder()
+      .text('Goodbye!')
+      .build()
+  );
 }
 
-function fallback(delegate) {
-  return new Promise(resolve => {
-    delegate.tell('I\'m sory, I didn\'t understand');
-    resolve();
-  });
+function fallback(inputData) {
+  return Promise.resolve(
+    new ResponseBuilder()
+      .text('I\'m sory, I didn\'t understand')
+      .build()
+  );
 }
 
 module.exports = {

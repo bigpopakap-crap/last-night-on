@@ -32,7 +32,10 @@ class GoogleAppBuilder {
       assistant.getIntents().forEach(intent => {
         actionMap.set(intent.getName(), function(googleApp) {
           const delegate = new GoogleDelegate(googleApp);
-          assistant.handle(intent, delegate);
+          const inputData = delegate.getInputData();
+
+          return assistant.handle(intent, inputData)
+                          .then(response => delegate.respond(response));
         });
       });
 

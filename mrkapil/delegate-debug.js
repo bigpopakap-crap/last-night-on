@@ -12,22 +12,10 @@ class DebugDelegate extends Delegate {
     return this.request.query[argName];
   }
 
-  tell(text) {
+  respond(response) {
     return this.response.status(200)
                         .header('content-type', 'application/json')
-                        .send({
-                          action: 'tell',
-                          message: text
-                        });
-  }
-
-  ask(text) {
-    return this.response.status(200)
-                            .header('content-type', 'application/json')
-                            .send({
-                              action: 'ask',
-                              message: text
-                            });
+                        .send(response.toJson());
   }
 
 }

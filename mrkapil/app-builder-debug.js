@@ -13,8 +13,11 @@ class DebugAppBuilder {
 
     assistant.getIntents().forEach(intent => {
       app.get(`/intent/${intent.getName()}`, (request, response) => {
-        const debugDelegate = new DebugDelegate(request, response);
-        assistant.handle(intent, debugDelegate);
+        const delegate = new DebugDelegate(request, response);
+        const inputData = delegate.getInputData();
+
+        return assistant.handle(intent, inputData)
+                        .then(response => delegate.respond(response));
       });
     });
 

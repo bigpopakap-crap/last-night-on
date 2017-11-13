@@ -11,12 +11,12 @@ class GoogleDelegate extends Delegate {
     return this.assistant.getArgument(argName);
   }
 
-  tell(text) {
-    return this.assistant.tell(text);
-  }
-
-  ask(text) {
-    return this.assistant.ask(text);
+  respond(response) {
+    if (response.isPrompt()) {
+      return this.assistant.ask(response.getText());
+    } else {
+      return this.assistant.tell(response.getText());
+    }
   }
 
 }

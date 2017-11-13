@@ -1,16 +1,7 @@
 class Delegate {
 
-  getArg(argName) { return null; }
-  tell(text) {}
-  ask(text) {}
-
-  say(isQuestion, text) {
-    if (isQuestion) {
-      return this.ask(text);
-    } else {
-      return this.say(text);
-    }
-  }
+  getArg(argName) { throw new Error('delegates must implement getArg()'); }
+  respond(response) { throw new Error('delegates must implement respond()'); }
 
 }
 

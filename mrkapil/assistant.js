@@ -17,25 +17,26 @@ class Assistant {
   }
 
   // TODO log the user, platform, intent, and response
-  handleStart(delegate) {
-    return this.startHandler(delegate);
+  handleStart(inputData) {
+    return this.startHandler(inputData);
   }
 
   // TODO log the user, platform, intent, and response
-  handleEnd(delegate, isCancel) {
-    return this.endHandler(delegate, isCancel);
+  handleEnd(inputData, isCancel) {
+    return this.endHandler(inputData, isCancel);
   }
 
   // TODO log the user, platform, intent, and response
-  handle(intent, delegate) {
+  // TODO put the intent into the inputData param
+  handle(intent, inputData) {
     const handlers = this.intentHandlers
                         .filter(ih => ih.intent.getName() === intent.getName())
                         .map(ih => ih.handler);
 
     if (handlers.length > 0) {
-      return handlers[0](delegate);
+      return handlers[0](inputData);
     } else {
-      return this.fallbackHandler(delegate);
+      return this.fallbackHandler(inputData);
     }
   }
 
