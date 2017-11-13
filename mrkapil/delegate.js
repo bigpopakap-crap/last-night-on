@@ -1,6 +1,6 @@
 class Delegate {
 
-  getArg(argName) { throw new Error('delegates must implement getArg()'); }
+  getInputData() { throw new Error('delegates must implement getInputData()'); }
   respond(response) { throw new Error('delegates must implement respond()'); }
 
 }

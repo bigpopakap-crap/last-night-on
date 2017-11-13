@@ -1,4 +1,5 @@
 const Delegate = require('./delegate');
+const InputDataBuilder = require('./input-data-builder.js');
 
 class DebugDelegate extends Delegate {
 
@@ -8,8 +9,15 @@ class DebugDelegate extends Delegate {
     this.response = response;
   }
 
-  getArg(argName) {
-    return this.request.query[argName];
+  getInputData(argName) {
+    const data = new InputDataBuilder();
+
+    const map = this.request.query;
+    Object.keys(map).forEach(argName => {
+      data.argAndValue(argName, map[argName]);
+    });
+
+    return data.build();
   }
 
   respond(response) {

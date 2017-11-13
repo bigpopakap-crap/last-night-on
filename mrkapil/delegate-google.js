@@ -7,8 +7,17 @@ class GoogleDelegate extends Delegate {
     this.assistant = assistant;
   }
 
-  getArg(argName) {
-    return this.assistant.getArgument(argName);
+  getInputData() {
+    const data = new InputDataBuilder();
+
+    // TODO kapil make an input data object
+//    const map = this.assistant.getArgument(argName);
+//
+//    Object.keys(map).forEach(argName => {
+//      data.argAndValue(argName, map[argName]);
+//    });
+
+    return data.build();
   }
 
   respond(response) {
